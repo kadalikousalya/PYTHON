@@ -6,14 +6,21 @@
 
 class Solution:
     def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        temp=head
-        Hash_set=set()
-        while temp:
-            if temp in Hash_set:
-                return temp
-            Hash_set.add(temp)
-            temp=temp.next
+        slow=head
+        fast=head
+        while fast and fast.next:
+            slow=slow.next
+            fast=fast.next.next
+            if slow==fast:
+                slow=head
+                while slow!=fast:
+                    slow=slow.next
+                    fast=fast.next
+                    
+                return slow
+                
         return None
+
             
 
         
